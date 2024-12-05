@@ -1,42 +1,47 @@
-# Game of Life in C
+# Block of Life
 
-This is a simple project where I am trying to implement **Conway's Game of Life** in C. The goal is to simulate an environment where cells live, die, or reproduce based on specific rules.
+**Block of Life** is a simple C program that simulates the Game of Life, a cellular automaton devised by the British mathematician John Horton Conway. This project was created to help me improve my C programming skills and learn how to publish software as a .deb package.
 
-## Description
+## Features
 
-Currently, the implementation generates a **stable** pattern formed by **4 cells** together, known as the **Block**. This pattern is one of the simplest stable patterns in the Game of Life, where the cells do not move and remain in the same configuration after each iteration.
+- Implements the Game of Life algorithm.
+- Simple terminal-based interface for visualizing the simulation.
+- Easily customizable grid size and number of iterations.
 
-## How It Works
+## Installation
 
-The rules of Conway's Game of Life are as follows:
+To install the `.deb` package, follow these steps:
 
-- **A live cell with fewer than 2 neighbors dies** (due to loneliness).
-- **A live cell with 2 or 3 neighbors remains alive**.
-- **A live cell with more than 3 neighbors dies** (due to overpopulation).
-- **A dead cell with exactly 3 live neighbors becomes alive** (reproduction).
+1. Download the `.deb` package from the [Releases](https://github.com/MiracleForge/block-of-life/releases/download/v1.0.0/block-of-life_1.0-1_amd64.deb) section.
+   
+2. Install the package using the following command:
 
-## Current State of the Project
+   ```bash
+   sudo dpkg -i block-of-life_1.0-1_amd64.deb
 
-At the moment, the program generates a random initial configuration of cells. However, the only observed result so far is the **stable combination of 4 cells**, known as the **Block**.
+If there are missing dependencies, run:
 
+sudo apt-get install -f
 
-This configuration does not change after iterations, meaning the program is still in an early stage and needs improvement in logic to generate other dynamic patterns from the Game of Life.
+Run the program:
 
-## How to Run
+block-of-life
 
-1. Compile the code with a C compiler, for example:
-    ```bash
-    gcc -o game_of_life game_of_life.c
-    ```
+The program will display the current state of the cell matrix in the console.
 
-2. Run the program:
-    ```bash
-    ./game_of_life
-    ```
+Conclusion
 
-3. The program will display the current state of the cell matrix in the console.
+While the program works correctly for the Block stable pattern, there is much to be done to improve the logic, such as allowing for more patterns to evolve and optimizing the code's performance. Feel free to contribute or suggest improvements!
+Goal of the Project
 
-## Conclusion
+The primary goal of this project was to:
 
-While the program works correctly for the **Block** stable pattern, there is much to be done to improve the logic, such as allowing for more patterns to evolve and optimizing the code's performance. Feel free to contribute or suggest improvements!
+    Improve my C programming skills: This project was an opportunity to deepen my understanding of C and strengthen my ability to write efficient and clean C code.
+
+    Learn how to publish a software package: I wanted to learn how to package a C program as a .deb file and make it available for installation on Debian-based systems like Ubuntu.
+
+Contributing
+
+Feel free to fork the repository and submit pull requests if you have any improvements or suggestions. Contributions are welcome!
+License
 

@@ -9,3 +9,6 @@ main
 *.o
 *.a
 block-of-life
+debian/files
+debian/*.substvars
+
