@@ -3,3 +3,9 @@ main
 main
 *.exe
 *.out
+*.deb
+*.log
+*.out
+*.o
+*.a
+block-of-life

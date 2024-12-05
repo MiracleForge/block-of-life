@@ -1,0 +1,13 @@
+Source: block-of-life
+Section: games
+Priority: optional
+Maintainer: Paulo Henrique Moreira Rosado <pauomoreirarosado@hotmail.com>
+Build-Depends: debhelper (>= 9), gcc, make
+Standards-Version: 4.5.1
+
+Package: block-of-life
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, libc6
+Description: A simple implementation of Conway's Game of Life in C
+ A simple implementation of Conway's Game of Life in C, where cells live, die, or reproduce according to the game's rules.
+

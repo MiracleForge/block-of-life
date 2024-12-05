@@ -1,0 +1,13 @@
+#!/usr/bin/make -f
+
+export DH_COMPAT=7
+
+%:
+	dh $@ --with=python3
+
+build:
+	$(MAKE)
+
+install:
+	$(MAKE) install DESTDIR=$(CURDIR)/debian/$(PACKAGE)
+
