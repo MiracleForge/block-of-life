@@ -43,5 +43,4 @@ The primary goal of this project was to:
 Contributing
 
 Feel free to fork the repository and submit pull requests if you have any improvements or suggestions. Contributions are welcome!
-License
 
