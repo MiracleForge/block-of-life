@@ -1,11 +1,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <time.h>
 
 #define clrscr() printf("\e[1;1H\e[2J")
 
-#define ROW_NUMBER 30
-#define COLUMNS_NUMBER 10
+#define ROW_NUMBER 200
+#define COLUMNS_NUMBER 200
 
 // Desenha o título do jogo
 int Draw_Tittle(char* title) {
@@ -17,6 +18,7 @@ int Draw_Tittle(char* title) {
 
 // Inicializa a matriz com valores aleatórios
 int Inicializing(int *cellmap) {
+    srand(time(NULL));
     for (int i = 0; i < ROW_NUMBER * COLUMNS_NUMBER; i++) {
         cellmap[i] = rand() % 2;
     }
@@ -107,7 +109,11 @@ int main() {
     while (game_running) {
         clrscr();
         Draw_Grid(ROW_NUMBER, COLUMNS_NUMBER, cell_map);
-        sleep(1);
+        struct timespec req = {0};
+        req.tv_sec = 0; // Segundo
+        req.tv_nsec = 500000000L; // Nanosegundos (0.99 segundos)
+    
+        nanosleep(&req, NULL) ;
         update(cell_map);
     }
 
