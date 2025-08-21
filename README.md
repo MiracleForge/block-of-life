@@ -1,46 +1,151 @@
 # Block of Life
 
-**Block of Life** is a simple C program that simulates the Game of Life, a cellular automaton devised by the British mathematician John Horton Conway. This project was created to help me improve my C programming skills and learn how to publish software as a .deb package.
+**Block of Life** is a simple C program that simulates the **Game of Life**, a cellular automaton devised by the British mathematician John Horton Conway. This project was created as a way to improve my C programming skills and to learn how to package software into a **.deb** package for Debian/Ubuntu-based systems.
 
-## Features
+## ✨ Features
 
-- Implements the Game of Life algorithm.
-- Simple terminal-based interface for visualizing the simulation.
-- Easily customizable grid size and number of iterations.
+* Implements the Game of Life algorithm.
+* Simple terminal-based interface for visualizing the simulation.
+* Random initialization of cells.
+* Configurable grid size and iterations.
 
-## Installation
+## 📦 Installation (Debian / Ubuntu)
 
-To install the `.deb` package, follow these steps:
+1. Download the **.deb** package from the Releases section.
+2. Install the package with the following command:
 
-1. Download the `.deb` package from the [Releases](https://github.com/MiracleForge/block-of-life/releases/download/v1.0.0/block-of-life_1.0-1_amd64.deb) section.
-   
-2. Install the package using the following command:
+```bash
+sudo dpkg -i block-of-life_*.deb
+```
 
-   ```bash
-   sudo dpkg -i block-of-life_1.0-1_amd64.deb
+3. If there are missing dependencies, run:
 
-If there are missing dependencies, run:
-
+```bash
 sudo apt-get install -f
+```
 
-Run the program:
+## 🚀 Usage
 
+After installation, you can run the program with:
+
+```bash
 block-of-life
+```
 
-The program will display the current state of the cell matrix in the console.
+## 🛠️ Building from Source
 
-Conclusion
+### Prerequisites
 
-While the program works correctly for the Block stable pattern, there is much to be done to improve the logic, such as allowing for more patterns to evolve and optimizing the code's performance. Feel free to contribute or suggest improvements!
-Goal of the Project
+* GCC compiler
+* Make
+* dpkg-dev (for creating .deb packages)
 
-The primary goal of this project was to:
+### Compilation
 
-    Improve my C programming skills: This project was an opportunity to deepen my understanding of C and strengthen my ability to write efficient and clean C code.
+1. Clone the repository:
+```bash
+[git clone https://github.com/MiracleForge/block-of-life.git
+cd block-of-life
+```
 
-    Learn how to publish a software package: I wanted to learn how to package a C program as a .deb file and make it available for installation on Debian-based systems like Ubuntu.
+2. Compile the program:
+```bash
+gcc -o block-of-life.c block-of-life
+```
 
-Contributing
+3. Run the program:
+```bash
+./block-of-life
+```
 
-Feel free to fork the repository and submit pull requests if you have any improvements or suggestions. Contributions are welcome!
+### Creating a .deb Package
 
+To create your own .deb package:
+
+```bash
+make package
+```
+
+## 🎮 How to Play
+
+The Game of Life follows these simple rules:
+
+1. Any live cell with fewer than two live neighbors dies (underpopulation).
+2. Any live cell with two or three live neighbors lives on to the next generation.
+3. Any live cell with more than three live neighbors dies (overpopulation).
+4. Any dead cell with exactly three live neighbors becomes a live cell (reproduction).
+
+## 📁 Project Structure
+
+```
+block-of-life/
+├── src/
+│   ├── main.c
+│   ├── game_of_life.c
+│   └── game_of_life.h
+├── debian/
+│   ├── control
+│   ├── changelog
+│   └── rules
+├── Makefile
+├── README.md
+└── LICENSE
+```
+## Upcoming Features
+🎯 Planned Updates (v2.0)
+### Enhanced Command Line Interface
+
+Auto-sizing: Grid automatically adapts to terminal dimensions
+Pattern library: Built-in famous Conway patterns (Glider, Gosper Gun, Pulsar, etc.)
+Color support: Colorized output for better visualization
+
+### Advanced Game of Life Features
+
+Cell aging: Visual representation of cell age with different colors/symbols
+Statistics tracking: Population graphs, stability detection, period analysis
+
+### Performance & Usability
+
+Export options: Generate GIF animations, PNG snapshots, or CSV data
+Configuration files: Save preferred settings and patterns
+
+### 🛠️ Technical Improvements
+
+Package managers: Available on homebrew, snap, and flatpak
+
+🎯 Planned Updates (v3.0)
+### Enhanced Command Line Interface
+
+Interactive mode: Pause, step through, and modify simulation in real-time
+
+### Advanced Game of Life Features
+
+Zoom functionality: Focus on specific regions of large grids
+Toroidal topology: Wrap-around edges for infinite-like behavior
+Multiple rule sets: Support for different cellular automaton rules (B3/S23, HighLife, etc.)
+Zoom functionality: Focus on specific regions of large grids
+
+### Performance & Usability
+
+Optimized algorithms: Sparse matrix representation for large grids
+Multi-threading: Parallel computation for faster iterations
+Memory efficiency: Dynamic allocation based on active regions
+
+### 🛠️ Technical Improvements
+
+Cross-platform: Windows and macOS support
+Package managers: Available on homebrew, snap, and flatpak
+Using OpenGl
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 🙏 Acknowledgments
+
+* John Horton Conway for creating the Game of Life
+* The open-source community for inspiration and tools
+
+## 📧 Contact
+
+Paulo Henrique Moreira Rosado - paulomoreirarosado@hotmail.com
