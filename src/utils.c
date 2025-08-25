@@ -12,14 +12,13 @@ void reset_input_mode(void) {
 
 void set_input_mode() {
   struct termios tattr;
-  char *name;
 
   // is a terminal?
   if (!isatty(STDIN_FILENO)) {
     fprintf(stderr, "Not a terminal");
     exit(EXIT_FAILURE);
   }
-  // save terminal attributes fror late
+  // save terminal attributes for late
   tcgetattr(STDIN_FILENO, &saved_attributes);
   atexit(reset_input_mode);
 
@@ -35,5 +34,10 @@ void set_input_mode() {
 void clearScreen() {
   const char *CLEAR_SCREEN_ANSI = "\033[H\033[2J";
   write(STDOUT_FILENO, CLEAR_SCREEN_ANSI, strlen(CLEAR_SCREEN_ANSI));
-  printf("\033[%d;%dH", (0), (0));
+  printf("\033[%d;%dH", (1), (1));
+}
+
+void handle_sigint(int sig) {
+  reset_input_mode();
+  exit(1);
 }

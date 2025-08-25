@@ -1,11 +1,13 @@
 #include "../include/draw.h"
 #include "../include/utils.h"
+#include <signal.h>
 #include <stdio.h>
 #include <unistd.h>
 
 int main() {
   int quit = 0;
   set_input_mode();
+  signal(SIGINT, handle_sigint);
 
   while (!quit) {
     clearScreen();
