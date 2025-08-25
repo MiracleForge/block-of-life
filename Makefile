@@ -1,20 +1,21 @@
 CC = gcc
-CFLAGS = -Wall -g
+CFLAGS = -Wall -g -Iinclude
 LDFLAGS =
-SRC = src/block_of_life.c
-OBJ = $(SRC:.c=.o)
+SRC = $(wildcard src/*.c)
+OBJ = $(SRC:src/%.c=build/%.o)
 EXEC = block-of-life
 
 all: $(EXEC)
 
-%.o: %.c
+build/%.o: src/%.c
+	mkdir -p build
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(EXEC): $(OBJ)
 	$(CC) $(OBJ) $(LDFLAGS) -o $(EXEC)
 
 clean:
-	rm -f $(OBJ) $(EXEC)
+	rm -rf build $(EXEC)
 
 install: $(EXEC)
 	mkdir -p $(CURDIR)/debian/block-of-life/usr/games

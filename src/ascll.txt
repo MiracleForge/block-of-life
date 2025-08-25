@@ -1,0 +1,5 @@
+┏━━━┓
+┃   ┃
+┗━━━┛
+
+alias block="gcc src/*.c -Iinclude -o block && ./block"
