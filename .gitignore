@@ -12,3 +12,11 @@ block-of-life
 debian/files
 debian/*.substvars
 
+# Ignore gcc/g++ binaries
+bin/
+gcc
+g++
+*.o
+*.out
+*.exe
+
