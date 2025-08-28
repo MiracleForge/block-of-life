@@ -1,3 +1,9 @@
+#include "../include/config.h"
+#include <sys/ioctl.h>
+#include <unistd.h>
 
-#define COLLUMS 80
-#define ROWS 15
+struct winsize terminal_size;
+
+void UpdateTerminalSize() { ioctl(STDOUT_FILENO, TIOCGWINSZ, &terminal_size); }
+
+void initConfig() { UpdateTerminalSize(); }
