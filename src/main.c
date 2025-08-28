@@ -10,7 +10,7 @@ int main() {
 
   while (!quit) {
     clearScreen();
-    drawHeader();
+    drawHeader(0);
     drawGameBoxCentered();
     sleep(3);
   }

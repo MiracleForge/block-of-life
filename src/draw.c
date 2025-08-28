@@ -1,11 +1,14 @@
 #include "../include/config.h"
-#include <asm-generic/ioctls.h>
-#include <malloc.h>
-#include <stdarg.h>
 #include <stdio.h>
 #include <string.h>
 #include <sys/ioctl.h>
-#include <unistd.h>
+
+typedef enum { MENU_START, MENU_OPTIONS, MENU_PAUSE, MENU_GAME_OVER } MenuState;
+
+typedef struct {
+  MenuState state;
+  const char *text;
+} Menu;
 
 void drawGameBoxCentered() {
   int box_width = terminal_size.ws_col - PADDING;
@@ -41,16 +44,25 @@ int getPaddingCenter(const char *string) {
   return (terminal_size.ws_col - strlen(string)) / 2;
 }
 
-void drawHeader() {
-  const char *header = "WELLCOME TO GAME OF LIFE\n";
-  const char *footer = "--------------------------------";
-  char *menuOptions = "(s) Start          (c)Configurations          (q)Quit";
-  // printf("%*s\n" $COLLUMS, header);
+void drawHeader(MenuState current_state) {
+
   UpdateTerminalSize();
+  const char *header = "WELCOME TO GAME OF LIFE\n";
+  int padding_header = getPaddingCenter(header);
+  printf("\n%*s%s", padding_header, "", header);
 
-  int padding_center = getPaddingCenter(header);
-  int options_centered = getPaddingCenter(menuOptions);
-  printf("\n%*s%s", padding_center, "", header);
+  Menu menus[] = {
+      {MENU_START, "(s) Start          (c) Configurations          (q) Quit"},
+      {MENU_OPTIONS, "(1) Option A      (2) Option B               (b) Back"},
+      {MENU_PAUSE, "(r) Resume         (q) Quit to Main Menu"},
+      {MENU_GAME_OVER, "Game Over! Press (m) to return to main menu"}};
 
-  printf("\n%*s%s", options_centered, "", menuOptions);
+  int menus_data_lenght = sizeof(menus) / sizeof(menus[0]);
+
+  for (int h = 0; h < menus_data_lenght; h++) {
+    if (menus[h].state == current_state) {
+      printf("%*s%s\n", getPaddingCenter(menus[h].text), "", menus[h].text);
+      break;
+    }
+  }
 }
