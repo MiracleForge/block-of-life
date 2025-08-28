@@ -4,7 +4,7 @@
 #include <sys/ioctl.h>
 
 #define PADDING 4
-#define PADDING_TOP 6
+#define PADDING_TOP 8
 extern struct winsize terminal_size;
 
 void UpdateTerminalSize();
