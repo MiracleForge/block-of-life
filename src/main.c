@@ -1,7 +1,6 @@
 #include "../include/draw.h"
 #include "../include/utils.h"
 #include <signal.h>
-#include <stdio.h>
 #include <unistd.h>
 
 int main() {
@@ -11,7 +10,7 @@ int main() {
 
   while (!quit) {
     clearScreen();
-    printf("WELLCOME TO GAME OF LIFE\n");
+    drawHeader();
     drawGameBox();
     sleep(3);
   }

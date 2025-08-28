@@ -2,5 +2,6 @@
 #define DRAW_H
 
 void drawGameBox(void);
+void drawHeader(void);
 
 #endif
