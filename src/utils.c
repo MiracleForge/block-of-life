@@ -3,6 +3,7 @@
 #include <string.h>
 #include <termios.h>
 #include <unistd.h>
+
 struct termios saved_attributes;
 
 void reset_input_mode(void) {

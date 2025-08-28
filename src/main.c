@@ -11,7 +11,7 @@ int main() {
   while (!quit) {
     clearScreen();
     drawHeader();
-    drawGameBox();
+    drawGameBoxCentered();
     sleep(3);
   }
 

@@ -1,7 +1,7 @@
 #ifndef DRAW_H
 #define DRAW_H
 
-void drawGameBox(void);
+void drawGameBoxCentered(void);
 void drawHeader(void);
 
 #endif
