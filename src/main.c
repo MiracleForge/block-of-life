@@ -5,6 +5,7 @@
 
 int main() {
   int quit = 0;
+
   set_input_mode();
   signal(SIGINT, handle_sigint);
 

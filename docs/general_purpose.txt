@@ -1,0 +1,2 @@
+Compiling all files and running 
+alias block="gcc src/*.c -Iinclude -o block && ./block"

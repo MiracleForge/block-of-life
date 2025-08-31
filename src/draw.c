@@ -1,14 +1,8 @@
+#include "../include/draw.h"
 #include "../include/config.h"
 #include <stdio.h>
 #include <string.h>
 #include <sys/ioctl.h>
-
-typedef enum { MENU_START, MENU_OPTIONS, MENU_PAUSE, MENU_GAME_OVER } MenuState;
-
-typedef struct {
-  MenuState state;
-  const char *text;
-} Menu;
 
 void drawGameBoxCentered() {
   int box_width = terminal_size.ws_col - PADDING;
