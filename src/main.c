@@ -12,20 +12,17 @@ fd_set fds;
 
 int main() {
   int quit = 0;
-  int needs_redraw = 1; // flag to controw when to draw
+  int needs_redraw = 1; // flag to control when to draw
   MenuState current_state = MENU_START;
 
   set_input_mode();
   signal(SIGINT, handle_sigint);
 
   while (!quit) {
-    if (needs_redraw) {
-      clearScreen();
-      drawHeader(current_state);
-      drawGameBoxCentered();
-      fflush(stdout);
-      needs_redraw = 0;
-    }
+    clearScreen();
+    drawHeader(current_state);
+    drawGameBoxCentered();
+    fflush(stdout);
 
     FD_ZERO(&fds);
     FD_SET(STDIN_FILENO, &fds);
@@ -40,7 +37,6 @@ int main() {
       if (tolower(ch) == 'q') {
         quit = 1;
       }
-      needs_redraw = 1;
     }
   }
 
