@@ -9,6 +9,7 @@ struct termios saved_attributes;
 void reset_input_mode(void) {
   tcsetattr(STDIN_FILENO, TCSANOW, &saved_attributes);
   printf("\033[?25h");
+  printf("\e[1;1H\e[2J");
 }
 
 void set_input_mode() {
