@@ -2,7 +2,6 @@
 #include "../include/draw.h"
 #include "../include/game.h"
 #include "../include/utils.h"
-#include <bits/types/struct_timeval.h>
 #include <signal.h>
 #include <stdio.h>
 #include <sys/select.h>
