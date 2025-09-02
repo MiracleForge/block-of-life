@@ -4,6 +4,13 @@
 #include <string.h>
 #include <sys/ioctl.h>
 
+static const Menu menus[] = {
+    {MENU_START, "(s) Start          (c) Configurations          (q) Quit"},
+    {MENU_OPTIONS, "(1) Option A      (2) Option B               (b) Back"},
+    {MENU_PAUSE, "(r) Resume         (q) Quit to Main Menu"},
+    {MENU_GAME_OVER, "Game Over! Press (m) to return to main menu"},
+    {MENU_GAME_RUN, ""}};
+
 void drawGameBoxCentered(MenuState *current_state) {
   if (*current_state != MENU_GAME_RUN)
     return;
@@ -16,52 +23,63 @@ void drawGameBoxCentered(MenuState *current_state) {
     left_padding = 0;
 
   // Top border
-  printf("\n");
-  printf("%*s┏", left_padding, "");
+  putchar('\n');
+  // Top border
+  printf("%*s%s", left_padding, "", "┏");
   for (int t = 0; t < box_width; t++)
-    printf("━");
-  printf("┓\n");
+    printf("%s", "━");
+  printf("%s\n", "┓");
 
   // Vertical lines
   for (int r = 0; r < box_height; r++) {
-    printf("%*s┃", left_padding, "");
+    printf("%*s%s", left_padding, "", "┃");
     for (int t = 0; t < box_width; t++)
-      printf(" ");
-    printf("┃\n");
+      putchar(' ');
+    printf("%s\n", "┃");
   }
 
   // Bottom border
-  printf("%*s┗", left_padding, "");
+  printf("%*s%s", left_padding, "", "┗");
   for (int t = 0; t < box_width; t++)
-    printf("━");
-  printf("┛\n");
+    printf("%s", "━");
+  printf("%s\n", "┛");
 }
 
 int getPaddingCenter(const char *string) {
-  return (terminal_size.ws_col - strlen(string)) / 2;
+  int pad = (terminal_size.ws_col - strlen(string)) / 2;
+  return pad > 0 ? pad : 0;
 }
 
-void drawHeader(MenuState *current_state) {
-
+void drawHeader(MenuState *current_state, CellData *cell_info) {
   UpdateTerminalSize();
+
   const char *header = "WELCOME TO GAME OF LIFE\n";
-  int padding_header = getPaddingCenter(header);
-  printf("\n%*s%s", padding_header, "", header);
+  printf("%*s%s", getPaddingCenter(header), "", header);
 
-  Menu menus[] = {
-      {MENU_START, "(s) Start          (c) Configurations          (q) Quit"},
-      {MENU_OPTIONS, "(1) Option A      (2) Option B               (b) Back"},
-      {MENU_PAUSE, "(r) Resume         (q) Quit to Main Menu"},
-      {MENU_GAME_OVER, "Game Over! Press (m) to return to main menu"},
-      {MENU_GAME_RUN, "Alive cells     %s     Death cells     %s      Species "
-                      "cells   %s      (p) Pause"}};
+  if (*current_state == MENU_GAME_RUN) {
+    char buffer[256];
+    snprintf(buffer, sizeof(buffer),
+             "Alive cells %d   Death cells %d   Species cells %d   (p) Pause",
+             cell_info->aliveCells, cell_info->deadCells,
+             cell_info->cellsType2);
+    printf("%*s%s\n", getPaddingCenter(buffer), "", buffer);
+    return;
+  }
 
-  int menus_data_lenght = sizeof(menus) / sizeof(menus[0]);
-
-  for (int h = 0; h < menus_data_lenght; h++) {
-    if (menus[h].state == *current_state) {
-      printf("%*s%s\n", getPaddingCenter(menus[h].text), "", menus[h].text);
-      break;
-    }
+  switch (*current_state) {
+  case MENU_START:
+    printf("%*s%s\n", getPaddingCenter(menus[0].text), "", menus[0].text);
+    break;
+  case MENU_OPTIONS:
+    printf("%*s%s\n", getPaddingCenter(menus[1].text), "", menus[1].text);
+    break;
+  case MENU_PAUSE:
+    printf("%*s%s\n", getPaddingCenter(menus[2].text), "", menus[2].text);
+    break;
+  case MENU_GAME_OVER:
+    printf("%*s%s\n", getPaddingCenter(menus[3].text), "", menus[3].text);
+    break;
+  default:
+    break;
   }
 }

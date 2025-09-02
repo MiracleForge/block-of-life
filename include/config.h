@@ -15,6 +15,13 @@ typedef enum {
   MENU_GAME_QUIT
 } MenuState;
 
+typedef struct {
+  int aliveCells;
+  int deadCells;
+  int cellsType1;
+  int cellsType2;
+} CellData;
+
 extern struct winsize terminal_size;
 
 void UpdateTerminalSize();

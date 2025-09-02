@@ -8,6 +8,6 @@ typedef struct {
 } Menu;
 
 void drawGameBoxCentered(MenuState *current_state);
-void drawHeader(MenuState *current_state);
+void drawHeader(MenuState *current_state, CellData *cell_info);
 
 #endif

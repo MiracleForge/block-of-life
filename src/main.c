@@ -10,15 +10,18 @@
 struct timeval tv;
 fd_set fds;
 
+MenuState current_state = MENU_START;
+CellData cell_info = {
+    .aliveCells = 0, .deadCells = 0, .cellsType1 = 0, .cellsType2 = 2};
+
 int main() {
-  MenuState current_state = MENU_START;
 
   set_input_mode();
   signal(SIGINT, handle_sigint);
 
   while (current_state != MENU_GAME_QUIT) {
     clearScreen();
-    drawHeader(&current_state);
+    drawHeader(&current_state, &cell_info);
     drawGameBoxCentered(&current_state);
     fflush(stdout);
 
