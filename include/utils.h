@@ -10,7 +10,7 @@ void terminosSetup(void);
  * cursor, and saves the current terminal settings. The previous terminal
  * configuration will be automatically restored when the program exits.
  */
-void set_input_mode(void);
+int set_input_mode(void);
 /**
  * reset_input_mode - Restore the terminal to its previous state
  *

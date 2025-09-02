@@ -12,25 +12,40 @@ void reset_input_mode(void) {
   printf("\e[1;1H\e[2J");
 }
 
-void set_input_mode() {
+int set_input_mode(void) {
   struct termios tattr;
 
-  // is a terminal?
   if (!isatty(STDIN_FILENO)) {
-    fprintf(stderr, "Not a terminal");
-    exit(EXIT_FAILURE);
+    fprintf(stderr, "Not a terminal\n");
+    return -1; // erro
   }
-  // save terminal attributes for late
-  tcgetattr(STDIN_FILENO, &saved_attributes);
-  atexit(reset_input_mode);
 
-  tcgetattr(STDIN_FILENO, &tattr);
-  tattr.c_lflag &= ~(ICANON | ECHO); /* Clear ICANON and ECHO. */
+  if (tcgetattr(STDIN_FILENO, &saved_attributes) == -1) {
+    perror("tcgetattr");
+    return -1;
+  }
+
+  if (atexit(reset_input_mode) != 0) {
+    fprintf(stderr, "Erro ao registrar atexit\n");
+    return -1;
+  }
+
+  if (tcgetattr(STDIN_FILENO, &tattr) == -1) {
+    perror("tcgetattr");
+    return -1;
+  }
+
+  tattr.c_lflag &= ~(ICANON | ECHO);
   tattr.c_cc[VMIN] = 1;
   tattr.c_cc[VTIME] = 0;
-  tcsetattr(STDIN_FILENO, TCSAFLUSH, &tattr);
+
+  if (tcsetattr(STDIN_FILENO, TCSAFLUSH, &tattr) == -1) {
+    perror("tcsetattr");
+    return -1;
+  }
 
   printf("\033[?25l");
+  return 0;
 }
 
 void clearScreen() {
