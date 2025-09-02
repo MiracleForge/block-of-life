@@ -6,7 +6,14 @@
 #define PADDING 4
 #define PADDING_TOP 8
 
-typedef enum { MENU_START, MENU_OPTIONS, MENU_PAUSE, MENU_GAME_OVER } MenuState;
+typedef enum {
+  MENU_START,
+  MENU_OPTIONS,
+  MENU_PAUSE,
+  MENU_GAME_OVER,
+  MENU_GAME_RUN,
+  MENU_GAME_QUIT
+} MenuState;
 
 extern struct winsize terminal_size;
 

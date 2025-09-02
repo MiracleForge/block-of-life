@@ -7,7 +7,7 @@ typedef struct {
   const char *text;
 } Menu;
 
-void drawGameBoxCentered(void);
-void drawHeader(MenuState current_state);
+void drawGameBoxCentered(MenuState *current_state);
+void drawHeader(MenuState *current_state);
 
 #endif
