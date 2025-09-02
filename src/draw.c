@@ -51,7 +51,6 @@ int getPaddingCenter(const char *string) {
 }
 
 void drawHeader(MenuState *current_state, CellData *cell_info) {
-  UpdateTerminalSize();
 
   const char *header = "WELCOME TO GAME OF LIFE\n";
   printf("%*s%s", getPaddingCenter(header), "", header);

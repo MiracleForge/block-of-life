@@ -1,3 +1,4 @@
+#include "../include/config.h"
 #include "../include/draw.h"
 #include "../include/game.h"
 #include "../include/utils.h"
@@ -18,8 +19,10 @@ int main() {
 
   set_input_mode();
   signal(SIGINT, handle_sigint);
+  signal(SIGWINCH, handle_resize);
 
   while (current_state != MENU_GAME_QUIT) {
+    UpdateTerminalSize();
     clearScreen();
     drawHeader(&current_state, &cell_info);
     drawGameBoxCentered(&current_state);

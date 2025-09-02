@@ -24,5 +24,6 @@ typedef struct {
 
 extern struct winsize terminal_size;
 
+void handle_resize(int sig);
 void UpdateTerminalSize();
 #endif
