@@ -5,7 +5,7 @@
 #include <unistd.h>
 
 struct termios saved_attributes;
-
+extern int **cell_matrix;
 void reset_input_mode(void) {
   tcsetattr(STDIN_FILENO, TCSANOW, &saved_attributes);
   printf("\033[?25h");
@@ -52,9 +52,4 @@ void clearScreen() {
   const char *CLEAR_SCREEN_ANSI = "\033[H\033[2J";
   write(STDOUT_FILENO, CLEAR_SCREEN_ANSI, strlen(CLEAR_SCREEN_ANSI));
   printf("\033[%d;%dH", (1), (1));
-}
-
-void handle_sigint(int sig) {
-  reset_input_mode();
-  exit(1);
 }

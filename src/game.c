@@ -1,5 +1,32 @@
 #include "../include/config.h"
 #include <stdio.h>
+#include <stdlib.h>
+
+int **game_initialization(int *cols, int *rows, CellData *cell_info) {
+  int **matrix = NULL;
+
+  *cols = terminal_size.ws_col - 2;
+  *rows = terminal_size.ws_row - 2;
+
+  matrix = malloc(*rows * sizeof(int *));
+  if (!matrix) {
+    fprintf(stderr, "ERROR: malloc failed while allocating rows\n");
+    exit(1);
+  }
+
+  for (int i = 0; i < *rows; i++) {
+    matrix[i] = calloc(*cols, sizeof(int));
+    if (!matrix[i]) {
+      fprintf(stderr, "ERROR: malloc failed while allocating row %d\n", i);
+      for (int j = 0; j < i; j++)
+        free(matrix[j]);
+      free(matrix);
+      exit(1);
+    }
+  }
+
+  return matrix;
+}
 
 void handle_game_state(MenuState *current_state) {
   int ch = getchar();
@@ -41,3 +68,7 @@ void handle_game_state(MenuState *current_state) {
     break;
   }
 }
+
+void game_logic(int *cols, int *rows, int **cell_matrix, CellData *cell_info) {
+  printf("GAME RUNNING");
+};
