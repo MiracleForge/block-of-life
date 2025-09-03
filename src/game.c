@@ -52,8 +52,9 @@ void handle_game_state(MenuState *current_state) {
     break;
 
   case MENU_OPTIONS:
-    // TODO: Adicionar as opções customizáveis
-    *current_state = MENU_GAME_QUIT;
+    if (ch == 'b')
+      // TODO: Adicionar as opções customizáveis
+      *current_state = MENU_GAME_QUIT;
     break;
 
   case MENU_GAME_OVER:
