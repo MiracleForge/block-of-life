@@ -1,12 +1,15 @@
 #include "../include/config.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 int **game_initialization(int *cols, int *rows, CellData *cell_info) {
   int **matrix = NULL;
 
   *cols = terminal_size.ws_col - 2;
   *rows = terminal_size.ws_row - 2;
+
+  srand(time(NULL));
 
   matrix = malloc(*rows * sizeof(int *));
   if (!matrix) {
@@ -15,13 +18,17 @@ int **game_initialization(int *cols, int *rows, CellData *cell_info) {
   }
 
   for (int i = 0; i < *rows; i++) {
-    matrix[i] = calloc(*cols, sizeof(int));
+    matrix[i] = malloc(*cols * sizeof(int));
     if (!matrix[i]) {
       fprintf(stderr, "ERROR: malloc failed while allocating row %d\n", i);
       for (int j = 0; j < i; j++)
         free(matrix[j]);
       free(matrix);
       exit(1);
+    }
+
+    for (int j = 0; j < *cols; j++) {
+      matrix[i][j] = rand() % 2;
     }
   }
 
